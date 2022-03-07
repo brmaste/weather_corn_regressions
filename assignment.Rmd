@@ -131,7 +131,7 @@ ggplot(winnewinter) +
 
 ### Download NASS corn yield data
 
-```{r yield download}
+```{r yield download, include=FALSE}
 
 # set our API key with NASS
 nassqs_auth(key = "57FECF56-EF93-3934-9605-C65BB379D321")
@@ -364,16 +364,19 @@ ggplot(county_summer_yield_panel) +
 *Soybean yield per year shows a positive trend that is significant for the period of record (R-squared:  0.60, p-value: 9.968e-09).*
 
 ```{r, warning=F,message=F}
-
 # set our API key with NASS
 nassqs_auth(key = "57FECF56-EF93-3934-9605-C65BB379D321")
 
 # parameters to query on, with "statisticcat_desc= "YIELD""  changed: 
 params2 <- list(commodity_desc = "SOYBEANS", statisticcat_desc= "YIELD", prodn_practice_desc = "ALL PRODUCTION PRACTICES", year__GE = 1981, state_alpha = "IA")
+```
 
+```{r message=FALSE, warning=FALSE, include=FALSE}
 # download
 soyyieldsall <- nassqs_yields(params2)
+```
 
+```{r, warning=F,message=F}
 #str(soyyieldsall)
 
 soyyieldsall$county_ansi <- as.numeric(soyyieldsall$county_ansi)
